@@ -1,0 +1,12 @@
+# Ignore files and directories that should not be tracked by Git
+# Node.js dependencies
+node_modules
+
+# Ignore build output
+dist
+build
+
+# Ignore environment variable files
+.env
+.env.local
+.env.development.local

@@ -1,0 +1,11 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore configuration files:
+.vscode
+package.json
+package-lock.json
+
+# Ignore local env files:
+.env.*
