@@ -1,0 +1,88 @@
+/* Wrapper to move content down */
+.rendre-wrapper {
+  margin-top: 50px; /* Adjust spacing from top */
+}
+
+/* Table Styling */
+.rendre-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem; /* Space between rows */
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Table shadow */
+}
+
+/* Table header styling */
+.rendre-table th {
+  text-align: center;
+  padding: 10px 12px;
+  background-color: #e0e0e0; /* Light grey */
+  color: black;
+  font-size: 1rem;
+}
+
+/* Table row styling */
+.rendre-table tbody tr {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); /* Shadow per row */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Table body cell styling */
+.rendre-table td {
+  text-align: center;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  vertical-align: middle;
+}
+
+.rendre-table tbody tr:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transform: scale(1.01); /* Slight zoom */
+  transition: all 0.2s ease-in-out;
+  z-index: 1;
+  position: relative;
+}
+
+.rendre-table tbody tr:hover td {
+  background-color: #ffffff; /* White background on hover */
+}
+
+/* Button base style */
+.text-btn {
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin: 2px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 4px;
+  color: white; /* White text */
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  min-width: 90px;         /* Ensures uniform width for all buttons */
+  text-align: center;
+}
+
+/* Modifier button: orange background */
+.text-btn.modifier {
+  background-color: #fd7e14;
+}
+
+/* Rendre button: blue background */
+.text-btn.rendre {
+  background-color: #007bff;
+}
+
+/* Hover effect for buttons */
+.text-btn:hover {
+  opacity: 0.85;
+}
+
+/* Optional: Focus/active effects */
+.text-btn:focus,
+.text-btn:active {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+}

@@ -1,0 +1,118 @@
+h1 {
+  text-align: center;
+  margin-bottom: 20px; /* Reduced from 30px */
+  font-size: 1.5rem; /* Smaller font size */
+}
+
+.container {
+  max-width: 500px; /* Reduced from 600px */
+  margin: 15px auto 30px; /* Reduced margins */
+  padding: 15px; /* Reduced padding */
+  font-family: Arial, sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Reduced from 18px */
+}
+
+.required-label::after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.form-row {
+  display: flex;
+  gap: 6px; /* Reduced from 8px */
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 48%; /* Maintain width for two-column layout */
+  min-width: 140px; /* Reduced from 160px */
+}
+
+.form-group.full-width {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+.form-group label {
+  margin-bottom: 4px; /* Reduced from 6px */
+  font-size: 0.9rem; /* Smaller font size */
+}
+
+.input {
+  padding: 6px; /* Reduced from 8px */
+  font-size: 0.85rem; /* Reduced from 15px */
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Slightly smaller border radius */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Localisation input (third row) */
+.form-row .form-group.full-width .input {
+  width: 100%; /* Changed to full width for consistency, adjust if needed */
+}
+
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px; /* Reduced from 12px */
+  border: 1px solid #ccc;
+  padding: 8px; /* Reduced from 12px */
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Reduced from 8px */
+  font-size: 0.85rem; /* Smaller font size */
+}
+
+.button {
+  padding: 8px; /* Reduced from 10px */
+  font-size: 0.85rem; /* Reduced from 15px */
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%; /* Changed from 150% to fit container */
+  max-width: 150px; /* Reduced from 200px */
+  margin: 8px auto 0; /* Reduced from 12px */
+}
+
+.button:hover {
+  background-color: #218838;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 500px) { /* Adjusted from 600px */
+  .form-row {
+    flex-direction: column;
+    gap: 8px; /* Reduced from 12px */
+  }
+
+  .form-group {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .form-group.full-width {
+    flex: 1 1 100%;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr 1fr;
+  }
+}
