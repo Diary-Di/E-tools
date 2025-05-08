@@ -1,30 +1,26 @@
-'use client'; // Required for client-side interactivity in App Router
+'use client';
 
 import { useState } from 'react';
-import '@/app/css/emprunter.css'; // Import the CSS file
-
-interface FormData {
-  matricule: string;
-  nom: string;
-  niveau: string;
-  parcours: string;
-  materiel: string[];
-  localisation: string;
-}
+import '../css/emprunter.css';
 
 export default function EmprunterPage() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     matricule: '',
     nom: '',
     niveau: '',
     parcours: '',
-    materiel: [],
     localisation: '',
+    materiel: [],
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
+  const materielOptions = [
+    'Ordinateur', 'Projecteur', 'Tablette',
+    'Microphone', 'Casque', 'Clé USB',
+    'Caméra', 'Imprimante', 'Autre'
+  ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
 
     if (type === 'checkbox') {
       setFormData((prev) => ({
@@ -34,104 +30,92 @@ export default function EmprunterPage() {
           : prev.materiel.filter((item) => item !== value),
       }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    alert('Formulaire soumis avec succès !');
+    console.log('Submitted Data:', formData);
   };
 
+  const isFormValid =
+    formData.matricule.trim() &&
+    formData.nom.trim() &&
+    formData.niveau.trim() &&
+    formData.parcours.trim() &&
+    formData.localisation.trim() &&
+    formData.materiel.length > 0;
+
   return (
-    <div className="container">
-      <h1>Formulaire d'Emprunt</h1>
-      <form onSubmit={handleSubmit} className="form">
-        {/* Row 1: Numéro matricule and Nom */}
-        <div className="form-row">
+    <div className="form-container">
+      <h2>Formulaire d'emprunt de matériel</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-grid">
           <div className="form-group">
-            <label htmlFor="matricule" className="required-label">Numéro matricule</label>
+            <label htmlFor="matricule" className="form-label">Matricule de l'étudiant</label>
             <input
               type="text"
               id="matricule"
               name="matricule"
               value={formData.matricule}
               onChange={handleChange}
-              required
-              className="input"
             />
           </div>
+
           <div className="form-group">
-            <label htmlFor="nom">Nom</label>
+            <label htmlFor="nom" className="form-label">Nom de l'étudiant</label>
             <input
               type="text"
               id="nom"
               name="nom"
               value={formData.nom}
               onChange={handleChange}
-              required
-              className="input"
             />
           </div>
-        </div>
 
-        {/* Row 2: Niveau and Parcours */}
-        <div className="form-row">
           <div className="form-group">
-            <label htmlFor="niveau">Niveau</label>
-            <select
+            <label htmlFor="niveau" className="form-label">Niveau</label>
+            <input
+              type="text"
               id="niveau"
               name="niveau"
               value={formData.niveau}
               onChange={handleChange}
-              required
-              className="input"
-            >
-              <option value="">Sélectionner un niveau</option>
-              <option value="L1">L1</option>
-              <option value="L2">L2</option>
-              <option value="L3">L3</option>
-              <option value="M1">M1</option>
-              <option value="M2">M2</option>
-            </select>
+            />
           </div>
+
           <div className="form-group">
-            <label htmlFor="parcours">Parcours</label>
+            <label htmlFor="parcours" className="form-label">Parcours</label>
             <input
               type="text"
               id="parcours"
               name="parcours"
               value={formData.parcours}
               onChange={handleChange}
-              required
-              className="input"
             />
           </div>
-        </div>
 
-        {/* Row 3: Localisation */}
-        <div className="form-row">
-          <div className="form-group full-width">
-            <label htmlFor="localisation" className="required-label">Localisation</label>
+          <div className="form-group">
+            <label htmlFor="localisation" className="form-label">Localisation</label>
             <input
               type="text"
               id="localisation"
               name="localisation"
               value={formData.localisation}
               onChange={handleChange}
-              required
-              className="input"
             />
           </div>
         </div>
 
-        {/* Matériel à emprunter (Checkbox List) */}
-        <div className="form-group">
-          <label className="required-label">Matériel à emprunter</label>
-          <div className="checkbox-group">
-            {['Ordinateur', 'Projecteur', 'Tableau', 'Outils'].map((item) => (
-              <label key={item} className="checkbox-label">
+        <div className="checkbox-section">
+          <h3>Matériel à emprunter</h3>
+          <div className="checkbox-grid">
+            {materielOptions.map((item) => (
+              <label key={item} className="checkbox-item">
                 <input
                   type="checkbox"
                   name="materiel"
@@ -145,10 +129,9 @@ export default function EmprunterPage() {
           </div>
         </div>
 
-        {/* Valider Button */}
-        <button type="submit" className="button">
-          Valider
-        </button>
+        {isFormValid && (
+          <button type="submit" className="submit-button">Soumettre</button>
+        )}
       </form>
     </div>
   );

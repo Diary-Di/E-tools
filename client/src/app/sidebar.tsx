@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, Home, ArrowDown, ArrowUp, User, Plus, Edit, BarChart } from 'lucide-react';
+import { Menu, Home, ArrowDown, ArrowUp, User, Plus, List, Edit, BarChart } from 'lucide-react';
 import Login from './components/login';
 import './css/sidebar.css';
 
@@ -23,8 +23,9 @@ const Sidebar = () => {
 
   // Navigation items for authenticated users
   const adminNavItems = [
-    { name: 'Nouveau', path: '/nouveau', icon: <Plus size={20} /> },
-    { name: 'Editer', path: '/editer', icon: <Edit size={20} /> },
+    { name: 'Nouveau', path: '/ajouter', icon: <Edit size={20} /> },
+    { name: 'Faire inventaire', path: '/inventorier', icon: <Plus size={20} /> },
+    { name: 'Editer', path: '/editer', icon: <List size={20} /> },
     { name: 'Statistique', path: '/statistique', icon: <BarChart size={20} /> },
   ];
 
