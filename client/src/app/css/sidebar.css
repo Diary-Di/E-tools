@@ -1,4 +1,6 @@
 /* src/app/css/sidebar.css */
+
+/* === Sidebar Container === */
 .sidebar {
   background-color: #f7f7f7;
   color: #333333;
@@ -11,9 +13,10 @@
   transition: transform 0.3s ease-in-out, width 0.3s ease;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #f7f7f7;
+  border-right: 1px solid #f0f0f0;
   box-shadow: 2px 0 15px rgba(0, 0, 0, 0.05);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  z-index: 1000;
 }
 
 .sidebar.collapsed {
@@ -24,34 +27,14 @@
   transform: translateX(0);
 }
 
+/* === Sidebar Header === */
 .sidebar-header {
   padding: 1.5rem 1rem;
-  border-bottom: none;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.toggle-button {
-  padding: 0;
-  margin: 0;
-  background: none;
-  border: none;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.toggle-button:hover {
-  background: none;
-  transform: scale(1.1); /* Slight zoom for focus effect */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Border shadow effect */
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .sidebar-header h1 {
@@ -60,6 +43,9 @@
   letter-spacing: 0.025em;
   line-height: 1;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar.collapsed .sidebar-header h1,
@@ -68,10 +54,35 @@
   display: none;
 }
 
+/* === Toggle Button (Fixed Size) === */
+.toggle-button {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 6px;
+}
+
+.toggle-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* === Navigation === */
 nav {
   flex: 1;
   overflow-y: auto;
-  padding: 0 0.5rem;
+  padding: 0.5rem;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 .nav-link {
@@ -82,20 +93,20 @@ nav {
   font-size: 1rem;
   font-weight: 500;
   border-radius: 6px;
-  transition: color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
   color: #000000;
-  transform: scale(1.02); /* Subtle zoom for focus effect */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Border shadow effect */
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-link.active {
   background-color: #2ecc71;
   color: #ffffff;
   font-weight: 600;
-  border-left: none;
 }
 
 .nav-link div {
@@ -108,6 +119,7 @@ nav {
   line-height: 1;
 }
 
+/* === Bottom Section (Login/Logout) === */
 .bottom-section {
   padding: 1rem;
   flex-shrink: 0;
@@ -122,25 +134,36 @@ nav {
 }
 
 .bottom-section:hover {
-  transform: scale(1.02); /* Subtle zoom for focus effect */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Border shadow effect */
+  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .bottom-section span {
   line-height: 1;
 }
 
+/* === Overlay for Mobile View === */
 .overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
   display: none;
+  z-index: 999;
 }
 
 .overlay.active {
   display: block;
 }
 
+/* === Icon Wrapper === */
+.icon-wrapper {
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === Main Content Shift === */
 main {
   transition: margin-left 0.3s ease;
 }
@@ -149,17 +172,11 @@ main {
   margin-left: 4rem;
 }
 
-.icon-wrapper {
-  width: 24px; /* Fixed width to align icons in a straight line */
-  display: flex;
-  justify-content: center; /* Center the icon within the fixed width */
-  align-items: center;
-}
-
 @media (max-width: 767px) {
   main {
     margin-left: 0;
   }
+
   .sidebar.open + main {
     margin-left: 16rem;
   }
@@ -168,7 +185,5 @@ main {
 @media (min-width: 768px) {
   .sidebar {
     transform: translateX(0);
-    position: fixed;
-    height: 100vh;
   }
 }

@@ -3,31 +3,40 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, Home, ArrowDown, ArrowUp, User, Plus, List, Edit, BarChart } from 'lucide-react';
+import {
+  Menu,
+  Home,
+  ArrowDown,
+  ArrowUp,
+  User,
+  Plus,
+  List,
+  Edit,
+  BarChart,
+} from 'lucide-react';
 import Login from './components/login';
 import './css/sidebar.css';
+
+const navConfig = {
+  public: [
+    { name: 'Accueil', path: '/', icon: <Home size={20} /> },
+    { name: 'Emprunter', path: '/emprunter', icon: <ArrowDown size={20} /> },
+    { name: 'Rendre', path: '/rendre', icon: <ArrowUp size={20} /> },
+  ],
+  admin: [
+    { name: 'Nouveau', path: '/ajouter', icon: <Edit size={20} /> },
+    { name: 'Faire inventaire', path: '/inventorier', icon: <Plus size={20} /> },
+    { name: 'Editer', path: '/editer', icon: <List size={20} /> },
+    { name: 'Statistique', path: '/statistique', icon: <BarChart size={20} /> },
+  ],
+};
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track login state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const pathname = usePathname();
-
-  // Navigation items for non-authenticated users
-  const publicNavItems = [
-    { name: 'Accueil', path: '/', icon: <Home size={20} /> },
-    { name: 'Emprunter', path: '/emprunter', icon: <ArrowDown size={20} /> },
-    { name: 'Rendre', path: '/rendre', icon: <ArrowUp size={20} /> },
-  ];
-
-  // Navigation items for authenticated users
-  const adminNavItems = [
-    { name: 'Nouveau', path: '/ajouter', icon: <Edit size={20} /> },
-    { name: 'Faire inventaire', path: '/inventorier', icon: <Plus size={20} /> },
-    { name: 'Editer', path: '/editer', icon: <List size={20} /> },
-    { name: 'Statistique', path: '/statistique', icon: <BarChart size={20} /> },
-  ];
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -42,19 +51,20 @@ const Sidebar = () => {
 
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
-    setIsLoginOpen(false); // Close the login modal
+    setIsLoginOpen(false);
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    setIsOpen(false); // Optionally close the sidebar
+    setIsOpen(false);
   };
+
+  const navItems = isAuthenticated ? navConfig.admin : navConfig.public;
 
   return (
     <>
-      {/* Sidebar */}
       <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-        {/* Sidebar Header */}
+        {/* Header */}
         <div className="sidebar-header">
           <button className="toggle-button" onClick={toggleSidebar}>
             <div className="icon-wrapper">
@@ -64,26 +74,29 @@ const Sidebar = () => {
           <h1 className={isCollapsed ? 'hidden' : 'block'}>E-tools</h1>
         </div>
 
-        {/* Navigation Links */}
+        {/* Navigation */}
         <nav>
-          {(isAuthenticated ? adminNavItems : publicNavItems).map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={`nav-link ${pathname === item.path ? 'active' : ''}`}
-              onClick={() => setIsOpen(false)}
-            >
-              <div>
-                <div className="icon-wrapper">{item.icon}</div>
-                <span className={isCollapsed ? 'hidden' : 'inline'}>
-                  {item.name}
-                </span>
-              </div>
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === item.path || pathname.startsWith(item.path + '/');
+            return (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`nav-link ${isActive ? 'active' : ''}`}
+                onClick={() => setIsOpen(false)}
+              >
+                <div>
+                  <div className="icon-wrapper">{item.icon}</div>
+                  <span className={isCollapsed ? 'hidden' : 'inline'}>
+                    {item.name}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Bottom Section */}
+        {/* Footer Section */}
         <div
           className="bottom-section"
           onClick={isAuthenticated ? handleLogout : toggleLoginModal}
@@ -97,7 +110,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Overlay for mobile */}
+      {/* Overlay */}
       {isOpen && (
         <div
           className="overlay active"
@@ -109,7 +122,11 @@ const Sidebar = () => {
       )}
 
       {/* Login Modal */}
-      <Login isOpen={isLoginOpen} onClose={toggleLoginModal} onLoginSuccess={handleLoginSuccess} />
+      <Login
+        isOpen={isLoginOpen}
+        onClose={toggleLoginModal}
+        onLoginSuccess={handleLoginSuccess}
+      />
     </>
   );
 };
