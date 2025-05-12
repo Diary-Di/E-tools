@@ -26,7 +26,7 @@ const navConfig = {
   admin: [
     { name: 'Nouveau', path: '/ajouter', icon: <Edit size={20} /> },
     { name: 'Faire inventaire', path: '/inventorier', icon: <Plus size={20} /> },
-    { name: 'Editer', path: '/editer', icon: <List size={20} /> },
+    { name: 'Editer', path: '/lister_mat', icon: <List size={20} /> },
     { name: 'Statistique', path: '/statistique', icon: <BarChart size={20} /> },
   ],
 };
