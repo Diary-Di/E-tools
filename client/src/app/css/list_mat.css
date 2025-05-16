@@ -22,26 +22,24 @@
   }
   
   .category-bar button {
-    background-color: white; /* Set background color to white */
+    background-color: white;
     padding: 8px 16px;
-    border: none; /* Remove the border */
-    border-radius: 0; /* Remove border radius */
+    border: none;
+    border-radius: 0;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease, border-bottom 0.3s ease;
-    color: black; /* Inactive button text color */
+    color: black;
   }
   
-  /* Hover effect for buttons */
   .category-bar button:hover {
-    background-color: #f0f0f0; /* Light gray background on hover */
+    background-color: #f0f0f0;
   }
   
-  /* Active state: Add blue border-bottom color when clicked */
   .category-bar button.active {
-    border-bottom: 3px solid #007bff; /* Blue border-bottom for active button */
-    color: #007bff; /* Active text color */
+    border-bottom: 3px solid #007bff;
+    color: #007bff;
   }
   
   /* Table Styling */
@@ -70,6 +68,12 @@
     background-color: #ffffff;
     vertical-align: middle;
     white-space: nowrap;
+  }
+  
+  /* Set last column to 378px */
+  .datatable th:last-child,
+  .datatable td:last-child {
+    width: 378px;
   }
   
   /* Table row styling */

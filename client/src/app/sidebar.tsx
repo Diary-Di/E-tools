@@ -24,10 +24,10 @@ const navConfig = {
     { name: 'Rendre', path: '/rendre', icon: <ArrowUp size={20} /> },
   ],
   admin: [
-    { name: 'Nouveau', path: '/ajouter', icon: <Edit size={20} /> },
-    { name: 'Faire inventaire', path: '/inventorier', icon: <Plus size={20} /> },
-    { name: 'Editer', path: '/lister_mat', icon: <List size={20} /> },
-    { name: 'Statistique', path: '/statistique', icon: <BarChart size={20} /> },
+    { name: 'Réception', path: '/ajouter', icon: <Edit size={20} /> },
+    { name: 'Ajout matériel', path: '/inventorier', icon: <Plus size={20} /> },
+    { name: 'Vue', path: '/lister_mat', icon: <List size={20} /> },
+    { name: 'Emprunts', path: '/statistique', icon: <BarChart size={20} /> },
   ],
 };
 
