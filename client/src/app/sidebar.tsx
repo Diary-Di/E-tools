@@ -27,7 +27,7 @@ const navConfig = {
     { name: 'Réception', path: '/ajouter', icon: <Edit size={20} /> },
     { name: 'Ajout matériel', path: '/inventorier', icon: <Plus size={20} /> },
     { name: 'Vue', path: '/lister_mat', icon: <List size={20} /> },
-    { name: 'Emprunts', path: '/statistique', icon: <BarChart size={20} /> },
+    { name: 'Emprunts', path: '/stats_mat', icon: <BarChart size={20} /> },
   ],
 };
 
